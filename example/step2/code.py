@@ -1,3 +1,9 @@
+"""
+Ciao, questo è un esempio
+https://kmkfw.io/Getting_Started/ qui si trova la documentazione del framework che usiamo sui macropad
+questo file contiene l'implementazione per switch potenziometro e encoder
+"""
+
 print("Starting")
 
 import board
@@ -20,7 +26,7 @@ layers = Layers()
 encoder_handler = EncoderHandler()
 potentiometer_handler = PotentiometerHandler()
 keyboard.modules = [layers, encoder_handler, potentiometer_handler]
-keyboard.extensions.append(MediaKeys())
+keyboard.extensions.append(MediaKeys()) # https://kmkfw.io/media_keys/
 
 # === keyboard switch and buttons === # 
 # define row and column pins
@@ -29,6 +35,7 @@ keyboard.row_pins = (board.GP0,board.GP1,board.GP2,) # tre righe
 keyboard.diode_orientation = DiodeOrientation.COL2ROW  # diodo sulla riga, direzione lontano dal pin
 
 # Layers 
+# https://kmkfw.io/layers/
 LYR_STD, LYR_EXT = 0, 1
 
 TO_STD = KC.DF(LYR_STD) # to layer std
@@ -36,6 +43,7 @@ TO_STD = KC.DF(LYR_STD) # to layer std
 TO_EXT = KC.DF(LYR_EXT) # LOCK to layer ext
 
 # map keycodes to keys
+# https://kmkfw.io/keycodes/
 keyboard.keymap = [
     # std layer
     [
@@ -56,6 +64,9 @@ keyboard.keymap = [
 
 
 # === potentiometer or slider === #
+# per il potenziometro non c'è una parte di documentazione vera, è sperimentale
+# io mi ero basato su questa roba qui https://github.com/KMKfw/kmk_firmware/blob/main/user_keymaps/ZFR_KBD/RP2.65-F.py 
+# però è un po' astruso, è una cosa spartana
 
 keyboard.last_level = -1
 level_steps = 100
@@ -111,6 +122,14 @@ potentiometer_handler.pins = (
 
 
 # === rotary encoder === # 
+# https://kmkfw.io/encoder/
+encoder_handler.pins = (
+    # regular direction encoder and a button
+    (board.GP10, board.GP11, board.GP12,), # encoder #1 
+    # reversed direction encoder with no button handling and divisor of 2
+    (board.GP14, board.GP15, None, True, 2,), # encoder #2
+    )
+
 encoder_handler.map = [ 
     ((KC.UP, KC.DOWN, KC.MUTE),), # STD layer: turn right: up, turn left: down, onPress: mute audio
     ((KC.VOLD, KC.VOLU, KC.MUTE),), # EXT layer: turn right: volume up, turn left: volume down, onPress: mute audio
