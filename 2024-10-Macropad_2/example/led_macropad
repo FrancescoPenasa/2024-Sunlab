@@ -1,0 +1,40 @@
+"""
+You need to import the neopixel library
+The implementation require that you also define the keymap
+"""
+print("Starting")
+
+import board
+import neopixel
+from kmk.kmk_keyboard import KMKKeyboard
+from kmk.keys import KC
+from kmk.extensions.RGB import RGB
+from kmk.extensions.led import AnimationModes
+from kmk.scanners import DiodeOrientation
+from kmk.extensions.media_keys import MediaKeys
+
+# Initialize keyboard
+keyboard = KMKKeyboard()
+
+keyboard.col_pins = (board.GP3,) 
+keyboard.row_pins = (board.GP1,)
+keyboard.diode_orientation = DiodeOrientation.COL2ROW
+
+keyboard.keymap = [KC.C, KC.C, KC.C, KC.C, ]
+
+# Configure RGB LED strip
+rgb = RGB(
+    pixel_pin=board.GP0,           # Pin connected to NeoPixel data line
+    hue_default=30,                # Default hue (0-360, color wheel degrees)
+    sat_default=100,               # Saturation level (0-100)
+    val_default=50,                # Brightness level (0-100)
+    animation_mode=AnimationModes.STATIC,  # Set static color mode
+    num_pixels=30,                 # Ensure this matches your strip's length
+)
+
+# Add RGB extension to the keyboard
+keyboard.extensions.append(rgb)
+
+if __name__ == '__main__':
+    keyboard.go()
+
