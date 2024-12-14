@@ -22,5 +22,5 @@ Date incontri:
 - 2024-12-06:15.00 (3h) --> Programmazione 1 (gruppo 1)
 - 2024-12-07:15.00 (3h) --> Programmazione 1 (gruppo 2)
 
-- 2024-12-13:15.00 (3h) --> Restituzione risultati (gruppo 1)
-- 2024-12-14:15.00 (3h) --> Restituzione risultati (gruppo 2)
+- 2024-12-13:15.00 (3h) --> Restituzione risultati (gruppo 1) (4 partecipanti)
+- 2024-12-14:15.00 (3h) --> Restituzione risultati (gruppo 2) (9 partecipanti)
